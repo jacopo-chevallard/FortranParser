@@ -111,16 +111,17 @@ Parsing for intrinsic functions is case INsensitive.
 
 Operations are evaluated in the correct order:
 
-  ()          expressions in brackets first
-  -A          unary minus (or plus)
-  A**B A^B    exponentiation (A raised to the power B)
-  A*B  A/B    multiplication and division
-  A+B  A-B    addition and subtraction
+ - ()          expressions in brackets first
+ - -A          unary minus (or plus)
+ - A**B A^B    exponentiation (A raised to the power B)
+ - A*B  A/B    multiplication and division
+ - A+B  A-B    addition and subtraction
 
 The function string can contain integer or real constants. To be recognized
 as explicit constants these must conform to the format
-
+```
 [+|-][nnn][.nnn][e|E|d|D[+|-]nnn]
+```
 
 where nnn means any number of digits. The mantissa must contain at least
 one digit before or following an optional decimal point. Valid exponent 
