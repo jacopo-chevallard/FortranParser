@@ -2,11 +2,9 @@
 
 Fortran 2008 parser of mathematical expressions, based on Roland Schmehl [fparser](http://fparser.sourceforge.net)
 
-Table of contents
-=================
+## Table of contents
 
-Changes
-========
+## Changes
 - What's new in version 2.0:       
 
   * Renamed fparser to FortranParser
@@ -22,11 +20,9 @@ Changes
   CompileSubstr and CheckSyntax
   * Multiple operators produce error message in subroutine CheckSyntax
 
-Basic usage
-===========
+## Basic usage
 
-Step 0 - Module Import
-----------------------
+### Step 0 - Module Import
 In all program units where you want to use the function parser procedures 
 and variables you must import the module by:
 
@@ -37,8 +33,7 @@ USE FortranParser, only : EquationParser
 This command imports only the public class ``EquationParser``, which has only
 two public methods, the class ``constructor``, and the method ``evaluate``
 
-Step 1 - Constructtor and function parsing
-------------------------------------------
+### Step 1 - Constructtor and function parsing
 
 An instance of the ``EquationParser`` class is created with the following syntax
 ```fortran
@@ -60,8 +55,7 @@ An instance of the ``EquationParser`` class is created with the following syntax
 The contructor deals with the parsing (checking and compilation) into the
 bytecode. 
 
-Step 2 - Function evaluation
-----------------------------
+### Step 2 - Function evaluation
 The function value is evaluated for a specific set of variable values 
 by calling the method
 ```fortran
@@ -69,8 +63,7 @@ by calling the method
 ```
 where ``varValues`` is 1-dimensional array containing the variable values.
 
-Error handling
-===============
+## Error handling
 
 An error in the function parsing step leads to a detailed error message 
 (Type and position of error) and program termination.
@@ -78,8 +71,7 @@ An error in the function parsing step leads to a detailed error message
 An error during function evaluation returns a function value of 0.0 and
 trigger an error message from the bytecode-interpreter.
 
-Function string syntax
-======================
+## Function string syntax
 
 Although they have to be passed as array elements of the same declared 
 length (Fortran 90 restriction), the variable names can be of arbitrary 
@@ -127,8 +119,7 @@ one digit before or following an optional decimal point. Valid exponent
 identifiers are 'e', 'E', 'd' or 'D'. If they appear they must be followed 
 by a valid exponent!
 
-Notes
-=====
+## Notes
 
 * The precision of real numbers can be adapted to the calling program by 
   adjusting the KIND parameter rn in the external module parameters.
@@ -138,8 +129,7 @@ Notes
 * The package contains some test programs to demonstrate implementation and
   performance of the function parser.
 
-Credits
-=======
+## Credits
 
 The original farser, by Roland Schmehl can be found at http://fparser.sourceforge.net.
 
