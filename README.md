@@ -4,6 +4,13 @@ Fortran 2008 parser of mathematical expressions, based on Roland Schmehl [fparse
 
 ## Table of contents
 
+- [Changes](#changes)
+- [Basic usage](#basic-usage)
+- [Error handling](#error-handling)
+- [Function string syntax](#function-string-syntax)
+- [Notes](#notes)
+- [Credits](#credits)
+
 ## Changes
 - What's new in version 2.0:       
 
