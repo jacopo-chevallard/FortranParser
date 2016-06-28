@@ -51,7 +51,7 @@ An instance of the ``EquationParser`` class is created with the following syntax
   character(len=100)    :: stringEquation
   character(len=10)    :: variables(3)
 
-  stringEquation = '10. + 3*x - 5*x*y + exp(-z**2)'
+  stringEquation = '10 + 3*x - 5*x*y + exp(-z**2)'
   variables = ['x', 'y', 'z']
 
   eqParser = EquationParser(stringEquation, variables)
