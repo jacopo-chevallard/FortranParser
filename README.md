@@ -5,6 +5,7 @@ Fortran 2008 parser of mathematical expressions, based on Roland Schmehl [fparse
 ## Table of contents
 
 - [Changes](#changes)
+- [Compilation](#compilation)
 - [Basic usage](#basic-usage)
 - [Error handling](#error-handling)
 - [Function string syntax](#function-string-syntax)
@@ -27,6 +28,33 @@ Fortran 2008 parser of mathematical expressions, based on Roland Schmehl [fparse
   CompileSubstr and CheckSyntax
   * Multiple operators produce error message in subroutine CheckSyntax
 
+## Compilation
+
+To compile FortranParser you need [CMake](http://cmake.org). If CMake is installed on your machine, you can compile and install FortranParser with the following commands
+
+- Clone to GitHub repostiory 
+ ```bash
+ git clone https://github.com/jacopo-chevallard/FortranParser.git
+ ```
+ this command will clone into a new directory ``FortranParser`` the current master branch.
+
+- Move into the newly created ``FortranParser`` directory, create a ``build`` directory and move into it
+ ```bash
+ mkdir build ; cd build
+ ```
+
+- Run CMake
+ ```bash
+  cmake -DCMAKE_INSTALL_PREFIX=<install_dir> ..
+ ```
+ The above CMake command include the compilation of some tests. This can be
+ avoided by passing the option ``-DENABLE_TESTING=OFF`` to the cmake command.
+
+- Compile and install the FortranParser library
+ ```bash
+ make install
+ ```
+
 ## Basic usage
 
 ### Step 0 - Module Import
@@ -40,7 +68,7 @@ USE FortranParser, only : EquationParser
 This command imports only the public class ``EquationParser``, which has only
 two public methods, the class ``constructor``, and the method ``evaluate``
 
-### Step 1 - Constructtor and function parsing
+### Step 1 - Constructor and function parsing
 
 An instance of the ``EquationParser`` class is created with the following syntax
 ```fortran
