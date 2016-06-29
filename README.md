@@ -101,6 +101,33 @@ by calling the method
 ```
 where ``varValues`` is 1-dimensional array containing the variable values.
 
+## Usage in combination with JSON-Fortran
+
+FortranParser in combination with
+[JSON-Fortran](https://github.com/jacobwilliams/json-fortran) opens an
+easy-to-use way of reading and evaluating mathematical expressions at runtime.
+If you have both packages installed, than you can use:
+```fortran
+  use FortranParser, only : EquationParser
+  use json_module
+
+  implicit none
+
+  type(json_file) :: json
+  type(EquationParser) :: eqParser
+
+  jsonString = '{"variables" : ["x", "y"], "function" : "2*x+sin(y**2)"}'
+  call json%load_from_string(jsonString)
+
+  call json%get('function', func, found)
+  call json%get('variables', vars, found)
+
+  eqParser = EquationParser(func, vars)
+
+  value = eqParser%evaluate([2., 5.])
+  value = eqParser%evaluate([-2., -5.])
+```
+
 ## Error handling
 
 An error in the function parsing step leads to a detailed error message 
