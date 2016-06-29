@@ -13,10 +13,10 @@ Fortran 2008 parser of mathematical expressions, based on Roland Schmehl [fparse
 - [Credits](#credits)
 
 ## Changes
-- What's new in version 2.0:       
+- What's new in version 2.0:
 
   * Renamed fparser to FortranParser
-  * Changed appraoch to OOP, now everything happens by using the ``EquationParser`` class
+  * Changed approach to OOP, now everything happens by using the ``EquationParser`` class
 
 - What's new in version 1.1:       (thanks to Wilton P. Silva and Juha Mäkipelto for the bug reports)
 
@@ -32,7 +32,7 @@ Fortran 2008 parser of mathematical expressions, based on Roland Schmehl [fparse
 
 To compile FortranParser you need [CMake](http://cmake.org). If CMake is installed on your machine, you can compile and install FortranParser with the following commands
 
-- Clone to GitHub repostiory 
+- Clone the GitHub repository 
  ```bash
  git clone https://github.com/jacopo-chevallard/FortranParser.git
  ```
@@ -47,8 +47,11 @@ To compile FortranParser you need [CMake](http://cmake.org). If CMake is install
  ```bash
   cmake -DCMAKE_INSTALL_PREFIX=<install_dir> ..
  ```
- The above CMake command include the compilation of some tests. This can be
- avoided by passing the option ``-DENABLE_TESTING=OFF`` to the cmake command.
+ where ``<install_dir>`` is your installation directory. The FortranParser
+ library will be installed in ``<install_dir>/lib``, the *mod files in
+ ``<install_dir>/include``. The above CMake command include the compilation of
+ some tests. This can be avoided by passing the option ``-DENABLE_TESTING=OFF``
+ to the cmake command.
 
 - Compile and install the FortranParser library
  ```bash
@@ -87,7 +90,7 @@ An instance of the ``EquationParser`` class is created with the following syntax
 
 ```
 
-The contructor deals with the parsing (checking and compilation) into the
+The constructor deals with the parsing (checking and compilation) into the
 bytecode. 
 
 ### Step 2 - Function evaluation
@@ -159,14 +162,14 @@ by a valid exponent!
 * The precision of real numbers can be adapted to the calling program by 
   adjusting the KIND parameter rn in the external module parameters.
 
-* The package comilation is based on CMake 
+* The package compilation is based on CMake 
 
 * The package contains some test programs to demonstrate implementation and
   performance of the function parser.
 
 ## Credits
 
-The original farser, by Roland Schmehl can be found at http://fparser.sourceforge.net.
+The original fparser, by Roland Schmehl can be found at http://fparser.sourceforge.net.
 
 The function parser concept is based on a C++ class library written by 
 Juha Nieminen <warp@iki.fi> available from:
