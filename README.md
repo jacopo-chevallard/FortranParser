@@ -7,6 +7,7 @@ Fortran 2008 parser of mathematical expressions, based on Roland Schmehl [fparse
 - [Changes](#changes)
 - [Compilation](#compilation)
 - [Basic usage](#basic-usage)
+- [Usage in combination with JSON-Fortran](#usage-in-combination-with-json-fortran)
 - [Error handling](#error-handling)
 - [Function string syntax](#function-string-syntax)
 - [Notes](#notes)
