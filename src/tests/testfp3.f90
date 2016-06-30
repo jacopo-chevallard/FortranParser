@@ -10,7 +10,7 @@ PROGRAM fptest
   USE FortranParser,    ONLY: EquationParser
   IMPLICIT NONE
   type(EquationParser) :: eqParser
-  INTEGER,                             PARAMETER :: neval = 1000
+  INTEGER,                             PARAMETER :: neval = 10000000
   INTEGER,                             PARAMETER :: nfunc = 3
   CHARACTER (LEN=*), DIMENSION(nfunc), PARAMETER :: func = (/ 'vel*COS(beta)           ', &
                                                               'vel*SIN(beta)*COS(alpha)', &
@@ -19,29 +19,27 @@ PROGRAM fptest
   CHARACTER (LEN=*), DIMENSION(nvar),  PARAMETER :: var  = (/ 'vel  ', &
                                                               'alpha', &
                                                               'beta ' /)
-  REAL(rn),          DIMENSION(nvar),  PARAMETER :: val  = (/  10., 1.5, 2.0  /)
+  REAL(rn),          DIMENSION(nvar, neval)      :: val 
   REAL(rn)                                       :: res
   INTEGER                                        :: i,n
   REAL                                           :: rt1,rt2,rt3
-  REAL(rn)                                       :: vel,alpha,beta
   !--------- -------- --------- --------- --------- --------- --------- --------- -----
   !
+  call random_number(val)
+
   CALL CPU_TIME (rt1)
-  DO n=1,neval
-    DO i=1,nfunc
-       eqParser = EquationParser(func(i), var)
-       res = eqParser%evaluate(val)
+  DO i=1,nfunc
+    eqParser = EquationParser(func(i), var)
+    DO n=1,neval
+       res = eqParser%evaluate(val(:,i))
     END DO
   END DO
   CALL CPU_TIME (rt2)
 
-  vel   = val(1)
-  alpha = val(2)
-  beta  = val(3)
   DO n=1,neval
-     res = vel*COS(beta)
-     res = vel*SIN(beta)*COS(alpha)
-     res = vel*SIN(beta)*SIN(alpha)
+     res = val(1,i)*COS(val(3,i))
+     res = val(1,i)*SIN(val(3,i))*COS(val(2,i))
+     res = val(1,i)*SIN(val(3,i))*SIN(val(2,i))
   END DO
   CALL CPU_TIME (rt3)
   WRITE(*,*)'Function evaluation:'

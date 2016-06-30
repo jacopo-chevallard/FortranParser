@@ -8,15 +8,22 @@ MODULE FortranParser
   !------- -------- --------- --------- --------- --------- --------- --------- -------
   ! Fortran 2008 function parser
   !------- -------- --------- --------- --------- --------- --------- --------- -------
+  ! 
+  ! This is an OOP Fortran 2008 version of the original fparser by Roland Schmehl. This simple class
+  ! wrapping of the original fparser has been developed by Jacopo Chevallard, and it is available on
+  ! the GitHub repository https://github.com/jacopo-chevallard/FortranParser.
+  ! 
+  ! For comments and bug reports, please open an issue on
+  ! https://github.com/jacopo-chevallard/FortranParser/issues
   !
   ! This function parser module is intended for applications where a set of mathematical
   ! fortran-style expressions is specified at runtime and is then evaluated for a large 
   ! number of variable values. This is done by compiling the set of function strings 
   ! into byte code, which is interpreted efficiently for the various variable values. 
   !
-  ! The source code is available from http://fparser.sourceforge.net
+  ! The source code of the original fparser is available from http://fparser.sourceforge.net
   !
-  ! Please send comments, corrections or questions to the author:
+  ! Please send comments, corrections or questions realtive to the original fparser to its author:
   ! Roland Schmehl <roland.schmehl@alumni.uni-karlsruhe.de>
   !
   !------- -------- --------- --------- --------- --------- --------- --------- -------
@@ -54,11 +61,13 @@ MODULE FortranParser
                                                          cAcos    = 20,         &
                                                          cAtan    = 21,         &
                                                          VarBegin = 22
+
   CHARACTER (LEN=1), DIMENSION(cAdd:cPow),  PARAMETER :: Ops      = (/ '+',     &
                                                                        '-',     &
                                                                        '*',     &
                                                                        '/',     &
                                                                        '^' /)
+
   CHARACTER (LEN=5), DIMENSION(cAbs:cAtan), PARAMETER :: Funcs    = (/ 'abs  ', &
                                                                        'exp  ', &
                                                                        'log10', &
@@ -110,8 +119,6 @@ MODULE FortranParser
     procedure constructor
   end interface EquationParser
 
-  INTEGER,   DIMENSION(:),  ALLOCATABLE :: ipos              ! Associates function strings
-  !
 CONTAINS
 
 !*****************************************************************************************
@@ -398,10 +405,6 @@ CONTAINS
     WRITE(*,*)
     WRITE(*,'(A)') ' '//FuncStr
 
-    DO k=1,ipos(j)
-       WRITE(*,'(A)',ADVANCE='NO') ' '                       ! Advance to the jth position
-    END DO
-
     WRITE(*,'(A)') '?'
     STOP
   END SUBROUTINE ParseErrMsg
@@ -486,14 +489,12 @@ CONTAINS
     INTEGER                          :: k,lstr
 
     lstr = LEN_TRIM(str)
-    ipos = (/ (k,k=1,lstr) /)
 
     k = 1
 
     DO WHILE (str(k:lstr) /= ' ')                             
        IF (str(k:k) == ' ') THEN
           str(k:lstr)  = str(k+1:lstr)//' '                  ! Move 1 character to left
-          ipos(k:lstr) = (/ ipos(k+1:lstr), 0 /)             ! Move 1 element to left
           k = k-1
        END IF
        k = k+1
