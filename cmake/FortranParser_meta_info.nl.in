@@ -1,8 +1,0 @@
-&FortranParser_meta_info
-  FortranParser_branch = "@GIT_BRANCH@
-  FortranParser_commit_hash = "@GIT_COMMIT_HASH@"
-  FortranParser_date =       "@GIT_COMMIT_DATE@" 
-  FortranParser_tag  =       "@GIT_TAG@"         
-  FortranParser_info =      "@GIT_BRANCH@ - @GIT_TAG@ - @GIT_COMMIT_HASH@ - @GIT_COMMIT_DATE@"
-/
-
