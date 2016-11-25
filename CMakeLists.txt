@@ -24,7 +24,7 @@ endif ( NOT RPATH_CONFIG )
 
 
 # Set library name
-set ( LIBRARY_NAME FortranParser )
+set ( LIBRARY_NAME fortranparser )
 
 # Whether you build a static or shared library
 set(LIBRARY_TYPE SHARED)
