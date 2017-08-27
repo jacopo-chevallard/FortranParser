@@ -1,6 +1,11 @@
 # CMake project file for mt_stream
 cmake_minimum_required ( VERSION 2.6 )
-project ( FortranParser )
+
+# Allows to set project version
+cmake_policy(SET CMP0048 NEW)
+project (FortranParser VERSION 2.0.3)
+
+# Which languages do we use
 enable_language ( Fortran )
 
 # Set the CMAKE_MODULE_PATH
@@ -88,8 +93,8 @@ set_target_properties(
   )
 
 # set variables which will be sued by a calling CMakeLists.txt file
-set ( FORTRANPARSER_INCLUDE_DIR "${CMAKE_INSTALL_PREFIX}/include" CACHE INTERNAL "FORTRANPARSER include directory" )
-set ( FORTRANPARSER_LIBRARIES_DIR "${CMAKE_INSTALL_PREFIX}/lib" CACHE INTERNAL "FORTRANPARSER library directory" )
+set ( FORTRANPARSER_INCLUDE_DIR "${CMAKE_INCLUDEDIR}" CACHE INTERNAL "FORTRANPARSER include directory" )
+set ( FORTRANPARSER_LIBRARIES_DIR "${CMAKE_LIBDIR}" CACHE INTERNAL "FORTRANPARSER library directory" )
 set ( FORTRANPARSER_LIBRARIES "${LIBRARY_NAME}" CACHE INTERNAL "FORTRANPARSER library" )
 
 # *******************************************
