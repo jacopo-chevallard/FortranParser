@@ -102,6 +102,7 @@ MODULE FortranParser
 
       private
 
+      procedure, public :: from_string
       procedure, public :: evaluate
       procedure:: parse
       procedure :: Compile
@@ -114,38 +115,33 @@ MODULE FortranParser
 
   END TYPE EquationParser
 
-  ! Class constructor
-  interface EquationParser
-    procedure constructor
-  end interface EquationParser
-
 CONTAINS
 
 !*****************************************************************************************
-  type (EquationParser) function constructor(FuncStr, Var)
-
+  subroutine from_string(this,FuncStr,Var)
+    class(EquationParser), intent(out) :: this
     CHARACTER (LEN=*),               INTENT(in) :: FuncStr   ! Function string
     CHARACTER (LEN=*), DIMENSION(:), INTENT(in) :: Var       ! Array with variable names
 
-    constructor%ByteCode => null()
-    constructor%Immed => null()
-    constructor%Stack => null()
+    this%ByteCode => null()
+    this%Immed => null()
+    this%Stack => null()
 
-    constructor%ByteCodeSize = 0
-    constructor%ImmedSize = 0
-    constructor%StackSize = 0
-    constructor%StackPtr = 0
+    this%ByteCodeSize = 0
+    this%ImmedSize = 0
+    this%StackSize = 0
+    this%StackPtr = 0
 
-    constructor%funcString = FuncStr
-    constructor%funcStringOrig = FuncStr
+    this%funcString = FuncStr
+    this%funcStringOrig = FuncStr
 
-    allocate(constructor%variableNames(size(Var)))
+    allocate(this%variableNames(size(Var)))
 
-    constructor%variableNames(:) = Var(:)
+    this%variableNames(:) = Var(:)
 
-    call constructor%parse()
+    call this%parse()
 
-  end function constructor
+  end subroutine from_string
 
 !*****************************************************************************************
   subroutine finalize(this)

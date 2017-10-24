@@ -29,7 +29,7 @@ PROGRAM fptest
 
   CALL CPU_TIME (rt1)
   DO i=1,nfunc
-    eqParser = EquationParser(func(i), var)
+    call eqParser%from_string(func(i), var)
     DO n=1,neval
        res = eqParser%evaluate(val(:,i))
     END DO

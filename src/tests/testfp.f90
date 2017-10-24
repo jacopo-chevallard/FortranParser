@@ -22,7 +22,7 @@ PROGRAM fptest
   WRITE(*,*)'==> Bytecode evaluation:'
 
   DO i=1,nfunc
-     eqParser = EquationParser(func(i), var)
+     call eqParser%from_string(func(i), var)
      res = eqParser%evaluate(val)
      WRITE(*,*) func(i),'=',res
   END DO
