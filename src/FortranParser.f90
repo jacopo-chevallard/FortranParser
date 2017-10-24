@@ -123,24 +123,11 @@ CONTAINS
     CHARACTER (LEN=*),               INTENT(in) :: FuncStr   ! Function string
     CHARACTER (LEN=*), DIMENSION(:), INTENT(in) :: Var       ! Array with variable names
 
-    this%ByteCode => null()
-    this%Immed => null()
-    this%Stack => null()
-
-    this%ByteCodeSize = 0
-    this%ImmedSize = 0
-    this%StackSize = 0
-    this%StackPtr = 0
-
     this%funcString = FuncStr
     this%funcStringOrig = FuncStr
-
     allocate(this%variableNames(size(Var)))
-
     this%variableNames(:) = Var(:)
-
     call this%parse()
-
   end subroutine from_string
 
 !*****************************************************************************************
