@@ -135,9 +135,9 @@ CONTAINS
 
     type(EquationParser) :: this
 
-    if (associated(this%ByteCode))  nullify(this%ByteCode)
-    if (associated(this%Immed))     nullify(this%Immed)
-    if (associated(this%Stack))     nullify(this%Stack)
+    if (associated(this%ByteCode))  deallocate(this%ByteCode)
+    if (associated(this%Immed))     deallocate(this%Immed)
+    if (associated(this%Stack))     deallocate(this%Stack)
 
   end subroutine finalize
 
