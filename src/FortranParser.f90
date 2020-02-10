@@ -89,7 +89,7 @@ MODULE FortranParser
 
     INTEGER(is), POINTER  :: ByteCode(:) => null()
     INTEGER               :: ByteCodeSize = 0
-    REAL(rn),    POINTER  :: Immed(:) => null()
+    REAL(rn), ALLOCATABLE :: Immed(:)
     INTEGER               :: ImmedSize = 0
     REAL(rn), ALLOCATABLE :: Stack(:)
     INTEGER               :: StackSize = 0
@@ -144,7 +144,6 @@ CONTAINS
     type(EquationParser) :: this
 
     if (associated(this%ByteCode))  nullify(this%ByteCode)
-    if (associated(this%Immed))     nullify(this%Immed)
 
   end subroutine finalize
 
@@ -566,7 +565,7 @@ CONTAINS
 
     IF (SCAN(this%funcString(b:b),'0123456789.') > 0) THEN                 ! Check for begin of a number
        this%ImmedSize = this%ImmedSize + 1
-       IF (ASSOCIATED(this%Immed)) this%Immed(this%ImmedSize) = RealNum(this%funcString(b:e))
+       IF (ALLOCATED(this%Immed)) this%Immed(this%ImmedSize) = RealNum(this%funcString(b:e))
        n = cImmed
     ELSE                                                     ! Check for a variable
        n = VariableIndex(this%funcString(b:e), this%variableNames)
