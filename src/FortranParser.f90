@@ -87,13 +87,13 @@ MODULE FortranParser
 
   TYPE EquationParser
 
-    INTEGER(is), POINTER :: ByteCode(:) => null()
-    INTEGER              :: ByteCodeSize = 0
-    REAL(rn),    POINTER :: Immed(:) => null()
-    INTEGER              :: ImmedSize = 0
-    REAL(rn),    POINTER :: Stack(:) => null()
-    INTEGER              :: StackSize = 0
-    INTEGER              :: StackPtr = 0
+    INTEGER(is), POINTER  :: ByteCode(:) => null()
+    INTEGER               :: ByteCodeSize = 0
+    REAL(rn),    POINTER  :: Immed(:) => null()
+    INTEGER               :: ImmedSize = 0
+    REAL(rn), ALLOCATABLE :: Stack(:)
+    INTEGER               :: StackSize = 0
+    INTEGER               :: StackPtr = 0
 
     character(len=MAX_FUN_LENGTH) :: funcString = ''
     character(len=MAX_FUN_LENGTH) :: funcStringOrig = ''
@@ -145,7 +145,6 @@ CONTAINS
 
     if (associated(this%ByteCode))  nullify(this%ByteCode)
     if (associated(this%Immed))     nullify(this%Immed)
-    if (associated(this%Stack))     nullify(this%Stack)
 
   end subroutine finalize
 
