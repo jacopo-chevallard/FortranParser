@@ -87,13 +87,13 @@ MODULE FortranParser
 
   TYPE EquationParser
 
-    INTEGER(is), POINTER  :: ByteCode(:) => null()
-    INTEGER               :: ByteCodeSize = 0
-    REAL(rn), ALLOCATABLE :: Immed(:)
-    INTEGER               :: ImmedSize = 0
-    REAL(rn), ALLOCATABLE :: Stack(:)
-    INTEGER               :: StackSize = 0
-    INTEGER               :: StackPtr = 0
+    INTEGER(is), ALLOCATABLE :: ByteCode(:)
+    INTEGER                  :: ByteCodeSize = 0
+    REAL(rn), ALLOCATABLE    :: Immed(:)
+    INTEGER                  :: ImmedSize = 0
+    REAL(rn), ALLOCATABLE    :: Stack(:)
+    INTEGER                  :: StackSize = 0
+    INTEGER                  :: StackPtr = 0
 
     character(len=MAX_FUN_LENGTH) :: funcString = ''
     character(len=MAX_FUN_LENGTH) :: funcStringOrig = ''
@@ -109,8 +109,6 @@ MODULE FortranParser
       procedure :: CompileSubstr
       procedure :: MathItemIndex
       procedure :: CheckSyntax
-
-      final :: finalize
 
   END TYPE EquationParser
 
@@ -137,15 +135,6 @@ CONTAINS
     call constructor%parse()
 
   end function constructor
-
-!*****************************************************************************************
-  subroutine finalize(this)
-
-    type(EquationParser) :: this
-
-    if (associated(this%ByteCode))  nullify(this%ByteCode)
-
-  end subroutine finalize
 
 !*****************************************************************************************
   SUBROUTINE parse(this)
@@ -512,9 +501,9 @@ CONTAINS
     class(EquationParser) :: this
     INTEGER                                     :: istat
 
-    IF (ASSOCIATED(this%ByteCode)) DEALLOCATE ( this%ByteCode, &
-                                                   this%Immed,    &
-                                                   this%Stack     )
+    IF (ALLOCATED(this%ByteCode)) DEALLOCATE ( this%ByteCode, &
+                                               this%Immed,    &
+                                               this%Stack     )
     this%ByteCodeSize = 0
     this%ImmedSize    = 0
     this%StackSize    = 0
@@ -547,7 +536,7 @@ CONTAINS
 
     this%ByteCodeSize = this%ByteCodeSize + 1
 
-    IF (ASSOCIATED(this%ByteCode)) then
+    IF (ALLOCATED(this%ByteCode)) then
       this%ByteCode(this%ByteCodeSize) = b
     endif
 
