@@ -394,8 +394,6 @@ CONTAINS
     CHARACTER (LEN=*),           INTENT(in) :: FuncStr       ! Original function string
     CHARACTER (LEN=*), OPTIONAL, INTENT(in) :: Msg
 
-    INTEGER                                 :: k
-
     IF (PRESENT(Msg)) THEN
        WRITE(*,*) '*** Error in syntax of function string: '//Msg
     ELSE
