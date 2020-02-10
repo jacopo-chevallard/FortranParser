@@ -472,7 +472,7 @@ CONTAINS
        END DO
        DO j=1,SIZE(Var)
           IF (str(ib:in-1) == Var(j)) THEN                     
-             n = j                                           ! Variable name found
+             n = int(j,is)                                   ! Variable name found
              EXIT
           END IF
        END DO
@@ -582,7 +582,7 @@ CONTAINS
        n = cImmed
     ELSE                                                     ! Check for a variable
        n = VariableIndex(this%funcString(b:e), this%variableNames)
-       IF (n > 0) n = VarBegin+n-1
+       IF (n > 0) n = VarBegin+n-1_is
     END IF
 
   END FUNCTION MathItemIndex
