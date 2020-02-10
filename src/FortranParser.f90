@@ -127,21 +127,12 @@ CONTAINS
     CHARACTER (LEN=*),               INTENT(in) :: FuncStr   ! Function string
     CHARACTER (LEN=*), DIMENSION(:), INTENT(in) :: Var       ! Array with variable names
 
-    constructor%ByteCode => null()
-    constructor%Immed => null()
-    constructor%Stack => null()
-
-    constructor%ByteCodeSize = 0
-    constructor%ImmedSize = 0
-    constructor%StackSize = 0
-    constructor%StackPtr = 0
-
     constructor%funcString = FuncStr
     constructor%funcStringOrig = FuncStr
 
     allocate(constructor%variableNames(size(Var)))
 
-    constructor%variableNames(:) = Var(:)
+    constructor%variableNames = Var
 
     call constructor%parse()
 
