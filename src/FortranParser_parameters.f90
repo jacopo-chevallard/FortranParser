@@ -8,11 +8,11 @@ MODULE FortranParser_parameters
   !--------- -------- --------- --------- --------- --------- --------- --------- -----
   ! Specify data types
   !--------- -------- --------- --------- --------- --------- --------- --------- -----
-  use, intrinsic :: iso_fortran_env, only: REAL64
+  use, intrinsic :: iso_fortran_env, only: REAL64, INT32
   IMPLICIT NONE
   
-  INTEGER, PARAMETER :: rn = REAL64               ! Precision of real numbers
-  INTEGER, PARAMETER :: is = SELECTED_INT_KIND(1) ! Data type of bytecode
+  INTEGER, PARAMETER :: rn = REAL64 ! Precision of real numbers
+  INTEGER, PARAMETER :: is = INT32  ! Data type of bytecode
 END MODULE FortranParser_parameters
 
 
